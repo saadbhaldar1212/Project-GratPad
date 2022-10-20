@@ -2,7 +2,8 @@
 
 In today’s era, people are giving importance to everything and everyone except themselves, and no matter how much we deny it's hard to keep up with your life when one is going through a fragile mental state or emotional state. In this digitalized world there are still a few things that people prefer to do on paper because they lack a platform where they can manage multiple tasks.
 There are still many people who use diaries or books to write their thoughts out where they cannot completely open up as they constantly feel that their notes are unsafe and can be accessed by anyone so to overcome this problem and to respect one’s privacy in addition to develop one’s mindset this system is to be developed.
-<br>
+
+s
 Just like physical fitness, our mental fitness is a necessary aspect of our life as well and we should be given a safe space to let out all that we have in our minds. And we all need to hear the motivation out when everything seems down, and we have no one to cheer us up. A journaling system web application where people can note down their thoughts and put-up daily journal entries. Not just the journaling but an individual could go and read out daily affirmations as per the user’s choice for the times when they really want something motivating.
 
 <br>
