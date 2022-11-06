@@ -1,21 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
     {% include '/components/head.html' %}
 </head>
 <body>
-    
-    {% include '/components/navbar.html' %}
-    
-      <div class="container" style="padding-top: 50px;">
 
-          <!--Textarea-->
-        <div class="input-group">
-          <textarea class="form-control" aria-label="With textarea" placeholder="Write something here" style="height: 200px;"></textarea>
+{% include '/components/navbar.html' %}
+
+<div class="container" style="padding-top: 50px;">
+
+    <!--Textarea-->
+    <!--
+    <div class="input-group">
+        <textarea class="form-control" aria-label="With textarea" placeholder="Write something here"
+                  style="height: 200px;"></textarea>
+    </div>
+    -->
+
+    <!--Affirmation Carousel-->
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!--<div class="carousel-item active" data-bs-interval="5000">
+                <img src="https://source.unsplash.com/random/1920x1080?sig=1" class="d-block w-100">
+            </div>-->
+            {% block content %}
+            <div class="carousel-item" data-bs-interval="5000">
+
+                {% for datas in data %}
+                <span>
+                    {{ datas['_id'] }}
+                </span>
+                <!--<img src="{{ data['raw'] }}" class="d-block w-100">-->
+                <% end-for %}
+
+            </div>
+            {% end-block content %}
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
-          <!--Footer-->
-          {% include '/components/footer.html' %}
-      </div>
+
+    <!--Footer-->
+    {% include '/components/footer.html' %}
+</div>
 </body>
 </html>
