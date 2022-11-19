@@ -1,0 +1,15 @@
+<div class="container" style="padding-top: 50px;">
+
+        <!--Textarea-->
+        <!--
+        <div class="input-group">
+        <textarea class="form-control" aria-label="With textarea" placeholder="Write something here"
+                  style="height: 200px;"></textarea>
+        </div>
+        -->
+
+        {% include '/components/indexBody.html' %}
+
+        <!--Footer-->
+        {% include '/components/footer.html' %}
+    </div>
