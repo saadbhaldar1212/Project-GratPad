@@ -1,4 +1,12 @@
-<!-- Masthead-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Simple line icons-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Masthead-->
 <header class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
@@ -52,8 +60,34 @@
     </div>
 </section>
 
+<!-- Services-->
+<section class="content-section bg-primary text-white text-center" id="services">
+    <div class="container px-4 px-lg-5">
+        <div class="content-section-heading">
+        </div>
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
+                <h4><strong>User Friendly</strong></h4>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-heart"></i></span>
+                <h4><strong>Secure</strong></h4>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-lock"></i></span>
+                <h4><strong>24X7 Customer Support</strong></h4>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-mustache"></i></span>
+                <h4><strong>Portable</strong></h4>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Contact-->
-<section class="contact-section" id="contact">
+<section class="contact-section" id="contact" style="margin-top: 5rem;">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5">
             <div class="col-md-4 mb-3 mb-md-0">
@@ -95,3 +129,6 @@
     </div>
     {% include '/components/footer.html' %}
 </section>
+</body>
+</html>
+
