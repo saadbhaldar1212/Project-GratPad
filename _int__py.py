@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/db_name'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/gratpad'
 app.config['SECRET_KEY'] = '1234'
 db = SQLAlchemy(app)
 
