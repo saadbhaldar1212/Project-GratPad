@@ -16,9 +16,17 @@ class User(db.Model, UserMixin):
 def index():    
     return render_template('userHomePage.html')
 
+@app.route("/welcomePage")
+def mainPage():
+    return render_template('userMainPage.html')
+
 @app.route("/contactus")
 def contact():
     return render_template('userContactPage.html')
+
+@app.route("/about")
+def about():
+    return 'About us'
 
 @app.route("/userSignIn")
 def userSignIn():
