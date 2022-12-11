@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent2">
 	<ul class="navbar-nav ms-auto">
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="index.jsp"> <img
+			aria-current="page" href="{{ url_for('mainPage') }}"> <img
 				src="{{ url_for('static', filename='assets/icon/bootstrap-icons-1.8.2/house-door.svg') }}" width="25"
 				height="30" class="d-inline-block align-text-top"></a></li>
 
@@ -14,7 +14,7 @@
 
 
 		<li class="nav-item"><a class="nav-link"
-			aria-current="page" href="thank_you.jsp"> <img
+			aria-current="page" href="{{ url_for('thankyou') }}"> <img
 				src="{{ url_for('static', filename='assets/icon/bootstrap-icons-1.8.2/power.svg') }}" width="25"
 				height="30" class="d-inline-block align-text-top"></a></li>
 	</ul>

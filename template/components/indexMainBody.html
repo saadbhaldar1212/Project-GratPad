@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Simple line icons-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
 </head>
 <body>
     <!-- Masthead-->
@@ -11,7 +11,7 @@
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
             <div class="text-center">
-                <h1 class="mx-auto my-0 text-uppercase">Gratpad - signup aur signin ko ye page pe lo - href #</h1>
+                <h1 class="mx-auto my-0 text-uppercase">Gratpad</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5">A personal Gratitude Journaling website just for you.</h2>
                 <a class="btn btn-primary" href="#about">Get Started</a>
             </div>
@@ -28,14 +28,12 @@
                 <p class="text-white-50">
                     //ToDo - Will write something here
                     <br><br>
-                    <a class="btn btn-primary" href="{{ url_for('userSignIn') }}">Sign in</a>
-                    <a class="btn btn-primary" href="{{ url_for('userSignUp') }}">Sign up</a>
+                    <a class="btn btn-primary" href="{{ url_for('about') }}">Read More</a>
                 </p>
 
             </div>
         </div>
         <!--<img class="img-fluid" src="static/assets/img/index2.png" />-->
-    </div>
     </div>
 </section>
 
@@ -85,6 +83,80 @@
         </div>
     </div>
 </section>
+
+
+    <!-- Sing in  Form -->
+        <section class="sign-in" style="padding-top:5rem">
+            <div class="container1" id="signinid">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="{{ url_for('static', filename='assets/img/signin-image.jpg') }}" alt="sing up image"></figure>
+                        <a href="#signupid" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Hello, Welcome Back!</h2>
+                        <form method="#" class="register-form" id="login-form">
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
+                            <div class="form-group form-button">
+                                <a href="{{ url_for('mainPage') }}" type="button" name="signIn" class="form-submit">Log in</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Sign up form -->
+<section class="signup" style="padding-top:5rem">
+    <div class="container1" >
+        <div class="signup-content" id="signupid">
+            <div class="signup-form">
+                <h2 class="form-title">New to GratPad? We Welcome you</h2>
+                <form method="POST" class="register-form" id="register-form">
+                    <div class="form-group">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" name="name" id="name" placeholder="Your Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="zmdi zmdi-email"></i></label>
+                        <input type="email" name="email" id="email" placeholder="Your Email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="pass" id="pass" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                    </div>
+                </form>
+            </div>
+            <div class="signup-image">
+                <figure><img src="{{ url_for('static', filename='assets/img/signup-image.jpg') }}" alt="sing up image"></figure>
+                <a href="#signinid" class="signup-image-link">I am already member</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- Contact-->
 <section class="contact-section" id="contact" style="margin-top: 5rem;">

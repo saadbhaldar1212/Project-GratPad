@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit again</title>
+
+    <!--CSS-->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+</head>
+<body>
+
+  <center>
+      <h1 style="margin-top: 18%;">
+          Thanks you, Visit <a href="{{ url_for('index') }}">
+              again
+          </a>
+      </h1>
+      <p>
+          You can close this tab or can visit again by clicking the link
+      </p>
+    </center>
+
+    <!--JS-->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" ></script>
+
+</body>
+</html>

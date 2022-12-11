@@ -45,5 +45,10 @@ def userSignUp():
     return render_template('userSignUp.html')
 
 
+@app.route("/thank_you")
+def thankyou():
+    return render_template('/components/thank_you.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
