@@ -2,11 +2,11 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='template')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/gratpad'
 app.config['SECRET_KEY'] = '1234'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 class User(db.Model, UserMixin):
