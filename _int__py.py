@@ -17,7 +17,7 @@ class User(db.Model):
     u_repass = db.Column(db.String(100), nullable=False)
 
 
-class Login(db.Model, User):
+class Login(db.Model):
     l_id = db.Column(db.Integer, primary_key=True)
 
     def __init__(self):
