@@ -16,6 +16,9 @@ class User(db.Model):
     u_pass = db.Column(db.String(100), nullable=False)
     u_repass = db.Column(db.String(100), nullable=False)
 
+    def getId(self):
+        u_id = self.u_id
+
 
 class Login(db.Model):
     l_id = db.Column(db.Integer, primary_key=True)
