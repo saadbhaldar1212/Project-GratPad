@@ -89,5 +89,10 @@ def thankyou():
     return render_template('/components/thank_you.html')
 
 
+@app.route("/journal")
+def journal():
+    return render_template('journal.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
