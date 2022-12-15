@@ -94,5 +94,10 @@ def journal():
     return render_template('journal.html')
 
 
+@app.route("/merchandise")
+def merchandise():
+    return render_template('merchandise.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
