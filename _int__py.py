@@ -4,27 +4,22 @@ from datetime import datetime
 
 app = Flask(__name__, template_folder='template')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/gratpad'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = '1234'
-db = SQLAlchemy()
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
 class User(db.Model):
     u_id = db.Column(db.Integer, primary_key=True)
-    u_uname = db.Column(db.String(100), nullable=False)
-    u_email = db.Column(db.String(100), nullable=False)
-    u_pass = db.Column(db.String(100), nullable=False)
-    u_repass = db.Column(db.String(100), nullable=False)
-
-    def getId(self):
-        u_id = self.u_id
+    u_uname = db.Column(db.String(length=100), nullable=False)
+    u_email = db.Column(db.String(length=100), nullable=False, unique=True)
+    u_pass = db.Column(db.String(length=100), nullable=False)
+    u_repass = db.Column(db.String(length=100), nullable=False)
 
 
 class Login(db.Model):
     l_id = db.Column(db.Integer, primary_key=True)
-
-    def __init__(self):
-        super().__init__()
 
 
 class Contact(db.Model):
@@ -57,9 +52,13 @@ class Admin(db.Model):
     a_pass = db.Column(db.String(100), nullable=False)
 
 
+with app.app_context():
+    db.create_all()
+
+
 @app.route("/")
 def index():
-    return render_template('userHomePage.html')
+    return render_template('userHomePage.html', item_name={'id': 1, })
 
 
 @app.route("/welcomePage")
@@ -100,6 +99,11 @@ def journal():
 @app.route("/merchandise")
 def merchandise():
     return render_template('merchandise.html')
+
+
+@app.route("/user/<username>")
+def dynamic(username):
+    return f"<h1> Welcome {username} </h1>"
 
 
 if __name__ == '__main__':
