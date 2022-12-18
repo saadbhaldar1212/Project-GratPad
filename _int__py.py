@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from datetime import datetime
 from flask_wtf import FlaskForm
+from werkzeug.security import generate_password_hash
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
-from flask_bcrypt import bcrypt
+from flask_bcrypt import bcrypt, check_password_hash
 
 app = Flask(__name__, template_folder='template')
 
@@ -44,21 +45,21 @@ def validate_username(username):
 
 class RegisterForm(FlaskForm):
     u_name = StringField('Name', validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Username"})
+        min=4, max=200)], render_kw={"placeholder": "Username"})
     u_email = StringField('Email', validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Email"})
+        min=4, max=200)], render_kw={"placeholder": "Email"})
     u_pass = PasswordField('Password', validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Password"})
+        min=4, max=200)], render_kw={"placeholder": "Password"})
     u_repass = PasswordField('Re-enter Password', validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Re-enter Password"})
+        min=4, max=200)], render_kw={"placeholder": "Re-enter Password"})
     submit = SubmitField("Register")
 
 
 class LoginForm(FlaskForm):
     u_email = StringField('Email', validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Email"})
+        min=4, max=200)], render_kw={"placeholder": "Email"})
     u_pass = PasswordField(validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "Password"})
+        min=4, max=200)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
 
 
@@ -99,25 +100,22 @@ with app.app_context():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(u_email=form.u_email.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.u_pass, form.u_pass.data):
-                logout_user(user)
-                return redirect(url_for('mainPage'))
-    return render_template('userSignIn.html', form=form)
+    form1 = LoginForm()
+    form2 = RegisterForm()
 
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(u_email=form.u_email.data, u_pass=hashed_password)
+    if form2.validate_on_submit():
+        new_user = User.query(u_email=form2.u_email.data, u_pass=form2.u_pass.data)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('userSignIn'))
 
-    return render_template('userHomePage.html')
+    elif form1.validate_on_submit():
+        user = User.query.filter_by(u_email=form1.u_email.data).first()
+        if user and check_password_hash(user.u_pass, form1.u_pass.data):
+            logout_user()
+            return redirect(url_for('index'))
+
+    return render_template('userHomePage.html', form=form1)
 
 
 @app.route("/contactus")
@@ -136,37 +134,11 @@ def mainPage():
     return render_template('userMainPage.html')
 
 
-@app.route("/userSignIn", methods=['GET', 'POST'])
-def userSignIn():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(u_email=form.u_email.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.u_pass, form.u_pass.data):
-                logout_user(user)
-                return redirect(url_for('mainPage'))
-    return render_template('userSignIn.html', form=form)
-
-
 @app.route("/thank_you", methods=['GET', 'POST'])
 @login_required
 def thankyou():
     logout_user()
     return render_template('/components/thank_you.html')
-
-
-@app.route("/userSignUp", methods=['GET', 'POST'])
-def userSignUp():
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(u_email=form.u_email.data, u_pass=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('userSignIn'))
-
-    return render_template('userSignUp.html', form=form)
 
 
 @app.route("/journal")
