@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% include '/components/head.html' %}
+    {% include '/components/head.html' %}
+
     <title>GratPad | Journal</title>
 </head>
 <body>
 
 <div class="container">
 
-{% include '/components/navbar2.html' %}
+    {% include '/components/navbar2.html' %}
 
-<div class = "container" style="padding-top:3rem; padding-bottom:3rem">
-  <textarea id="tiny" placeholder="Title - Journal"></textarea>
-</div>
-
-  <div class="container" >
-  <!--Accordion or Simple text with Time, Title, and content-->
-  <h5><strong>12:30pm - Title any*</strong></h5>
-  <p class="text-break">sdfsdfsdfsdfsdfdfdfsdfsdfdsfdsffsdfsdfdsfsdfsddfsdfsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd</p>
-    <a href="#">Edit</a>
-    <a href="#">Delete</a><br><br>
-
-    <h5><strong>12:30pm - Title any*</strong></h5>
-  <p class="text-break">sdfsdfsdfsdfsdfdfdfsdfsdfdsfdsffsdfsdfdsfsdfsddfsdfsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd</p>
-    <a href="#">Edit</a>
-    <a href="#">Delete</a><br><br>
-
-    <h5><strong>12:30pm - Title any*</strong></h5>
-  <p class="text-break">sdfsdfsdfsdfsdfdfdfsdfsdfdsfdsffsdfsdfdsfsdfsddfsdfsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd</p>
-    <a href="#">Edit</a>
-    <a href="#">Delete</a><br><br>
-
+    <div class="container" style="padding-top:3rem; padding-bottom:3rem">
+        <textarea id="tiny" placeholder="Title - Journal"></textarea>
     </div>
 
+    {% for journal in journals %}
+    <div class="container">
+        <h5><strong>{{ journal.time }} - {{ journal.title }}</strong></h5>
+        <p class="text-break">{{ journal.desc }}</p>
+        <a href="#">Edit</a>
+        <a href="#">Delete</a><br><br>
+    </div>
+    {% endfor %}
 </div>
 
 {% include '/components/footer.html' %}

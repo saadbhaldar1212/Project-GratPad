@@ -10,7 +10,9 @@
 <header class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
+
             <div class="text-center">
+
                 <h1 class="mx-auto my-0 text-uppercase">Gratpad</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5">A personal Gratitude Journaling website just for you.</h2>
                 <a class="btn btn-primary" href="#about">Get Started</a>
@@ -90,11 +92,29 @@
         <div class="signup-content" id="signupid">
             <div class="signup-form">
                 <h2 class="form-title">New to GratPad? We Welcome you</h2>
-                <form method="POST" action="" class="register-form" id="register-form">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form method="POST" action="{{ url_for('index') }}" class="register-form" id="register-form">
                     <div class="form-group">
                         <i class="zmdi zmdi-account material-icons-name"></i>
                         {{ form.hidden_tag() }}
-                        {{ form.u_name }}
+                        {% if form.u_name.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.u_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.u_name }}
+                        {% endif %}
+
                     </div>
                     <div class="form-group">
                         <i class="zmdi zmdi-email"></i>
