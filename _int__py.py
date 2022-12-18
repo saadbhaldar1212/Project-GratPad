@@ -1,12 +1,9 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
+from flask_login import UserMixin, LoginManager, login_required, logout_user
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from datetime import datetime
 from flask_wtf import FlaskForm
-from werkzeug.security import generate_password_hash
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
-from flask_bcrypt import bcrypt, check_password_hash
 
 app = Flask(__name__, template_folder='template')
 
@@ -33,16 +30,6 @@ class User(db.Model, UserMixin):
     u_repass = db.Column(db.String(length=100), nullable=False)
 
 
-def validate_username(username):
-    existing_user_username = User.query.filter_by(
-        username=username.data).first()
-
-    if existing_user_username:
-        raise ValidationError(
-            'Username already exists. Please chose a different username'
-        )
-
-
 class RegisterForm(FlaskForm):
     u_name = StringField('Name', validators=[InputRequired(), Length(
         min=4, max=200)], render_kw={"placeholder": "Username"})
@@ -53,6 +40,15 @@ class RegisterForm(FlaskForm):
     u_repass = PasswordField('Re-enter Password', validators=[InputRequired(), Length(
         min=4, max=200)], render_kw={"placeholder": "Re-enter Password"})
     submit = SubmitField("Register")
+
+    def validate_username(self, u_email):
+        existing_user_username = User.query.filter_by(
+            u_email=u_email.data).first()
+
+        if existing_user_username:
+            raise ValidationError(
+                'Username already exists. Please chose a different username'
+            )
 
 
 class LoginForm(FlaskForm):
@@ -100,22 +96,24 @@ with app.app_context():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    form1 = LoginForm()
-    form2 = RegisterForm()
-
-    if form2.validate_on_submit():
-        new_user = User.query(u_email=form2.u_email.data, u_pass=form2.u_pass.data)
-        db.session.add(new_user)
-        db.session.commit()
+    form = RegisterForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.u_name.data}!', 'success')
         return redirect(url_for('userSignIn'))
 
-    elif form1.validate_on_submit():
-        user = User.query.filter_by(u_email=form1.u_email.data).first()
-        if user and check_password_hash(user.u_pass, form1.u_pass.data):
-            logout_user()
-            return redirect(url_for('index'))
+    return render_template('userHomePage.html', form=form)
 
-    return render_template('userHomePage.html', form=form1)
+
+@app.route("/logIn", methods=['GET', 'POST'])
+def userSignIn():
+    form = LoginForm()
+    user = User.query(u_email=form.u_email.data, u_pass=form.u_pass.data)
+
+    if form.validate_on_submit():
+        return redirect('mainPage')
+    else:
+        logout_user()
+        return redirect(url_for('index'))
 
 
 @app.route("/contactus")

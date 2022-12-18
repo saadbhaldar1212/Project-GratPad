@@ -19,37 +19,37 @@
         {% include '/components/navbar1.html' %}
 
         <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
+        <section class="sign-in" style="padding-top:5rem">
+            <div class="container1" id="signinid">
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="{{ url_for('static', filename='assets/img/signin-image.jpg') }}" alt="sing up image"></figure>
-                        <a href="{{ url_for('userSignUp') }}" class="signup-image-link">Create an account</a>
+                        <a href="{{ url_for('index') }}" class="signup-image-link">Create an account</a>
                     </div>
 
                     <div class="signin-form">
                         <h2 class="form-title">Hello, Welcome Back!</h2>
-                        <form method="#" class="register-form" id="login-form">
+                        <form method="POST" action="" class="register-form" id="login-form">
                             <div class="form-group">
-                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+                                {{ form.hidden_tag() }}
+                                {{ form.u_email }}
                             </div>
                             <div class="form-group">
-                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                                {{ form.u_pass }}
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
                             <div class="form-group form-button">
-                                <a href="{{ url_for('mainPage') }}" type="button" name="signin" class="form-submit">Log in</a>
+                                {{ form.submit }}
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+
 
     </div>
 
